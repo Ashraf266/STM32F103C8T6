@@ -26,7 +26,7 @@ typedef struct
 
 }RCC_RegMap;
 
-#define RCC                                     ((volatile RCC_RegMap *const)(RCC_BASE_ADDRESS))
+#define RCC                                     ((volatile RCC_RegMap *)(RCC_BASE_ADDRESS))
 
 /* Clock Types */
 #define	RCC_HSE_CRYSTAL				(0u)

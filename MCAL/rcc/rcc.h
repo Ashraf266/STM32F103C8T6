@@ -65,7 +65,7 @@
 #define RCC_APB2_SPI1                        (12u)
 #define RCC_APB2_TIM8                        (13u)
 #define RCC_APB2_USART1                      (14u)
-#define RCC_APB2_ADC2                        (15u)
+#define RCC_APB2_ADC3                        (15u)
 #define RCC_APB2_TIM9                        (19u)
 #define RCC_APB2_TIM10                       (20u)
 #define RCC_APB2_TIM11                       (21u)
