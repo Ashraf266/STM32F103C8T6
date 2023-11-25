@@ -55,10 +55,10 @@ void PORT_init(PORT_ConfigType *Config)
         else
         {
             /* Clear OLD Configurations */
-            PORT[portNumber]->CRH &= ~((u32)0xF<<(pinNumber*4));
+            PORT[portNumber]->CRH &= ~((u32)0xF<<((pinNumber - 8)*4));
 
             /* Set NEW Configurations */
-            PORT[portNumber]->CRH |= ((u32)((Config->pins[pinID].pinCfg << 2) | Config->pins[pinID].pinMode )<<(pinNumber*4));
+            PORT[portNumber]->CRH |= ((u32)((Config->pins[pinID].pinCfg << 2) | Config->pins[pinID].pinMode )<<((pinNumber - 8)*4));
         }
 
         /* Check pin direction to set additional configuration like internal res & Initial pin level*/
@@ -66,7 +66,7 @@ void PORT_init(PORT_ConfigType *Config)
         {
             /* initialize pin level */
             CLR_BIT(PORT[portNumber]->ODR, pinNumber);
-            PORT[portNumber]->ODR |= (Config->pins[pinID].pinDirection << pinNumber);
+            PORT[portNumber]->ODR |= (Config->pins[pinID].pinLevel << pinNumber);
         }
         else
         {
