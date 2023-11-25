@@ -8,7 +8,7 @@
 #ifndef PORT_CFG_H
 #define PORT_CFG_H
 
-
+#define PORT_NUM_OF_PINS            (35u)
 
 
 

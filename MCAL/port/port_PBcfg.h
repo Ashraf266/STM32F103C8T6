@@ -9,6 +9,7 @@
 #define PORT_PBCFG_H
 
 /* extern to the configuration Structure */
+extern PORT_ConfigType configurations;
 
 
 #endif /* PORT_PBCFG_H */
