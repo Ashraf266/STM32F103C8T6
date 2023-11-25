@@ -9,7 +9,7 @@
 #define PORT_H
 
 #include "port_cfg.h"
-#include "port_PBcfg.h"
+#include "std_types.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
@@ -72,6 +72,12 @@ typedef struct
 {
 	PORT_ConfigPin	pins[PORT_NUM_OF_PINS];
 }PORT_ConfigType;
+
+
+/*******************************************************************************
+ *                               External Variables                            *
+ *******************************************************************************/
+extern PORT_ConfigType configurations;
 
 
 /*******************************************************************************
