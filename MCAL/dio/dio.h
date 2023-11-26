@@ -1,9 +1,9 @@
 /********************************************************************
- * Module       : dio                                              *
- * File Name    : dio.h                                            *
- * Description  : contains definitions & interfaces for dio driver *
+ * Module       : dio                                               *
+ * File Name    : dio.h                                             *
+ * Description  : contains definitions & interfaces for dio driver  *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #ifndef DIO_H
 #define DIO_H

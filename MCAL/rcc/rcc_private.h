@@ -1,9 +1,9 @@
 /********************************************************************
- * Module       : rcc                                              *
- * File Name    : rcc_private.h                                    *
+ * Module       : rcc                                               *
+ * File Name    : rcc_private.h                                     *
  * Description  : contains private definitions & types              *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #ifndef RCC_PRIVATE_H
 #define RCC_PRIVATE_H

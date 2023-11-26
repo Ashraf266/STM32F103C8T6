@@ -3,7 +3,7 @@
  * File Name    : rcc.h                                             *
  * Description  : contains definitions & interfaces for rcc driver  *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #ifndef RCC_H
 #define RCC_H

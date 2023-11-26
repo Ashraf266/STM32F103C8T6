@@ -3,7 +3,7 @@
  * File Name    : port.c                                            *
  * Description  : port Implementation                               *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #include "bit_math.h"
 #include "port.h"

@@ -3,7 +3,7 @@
  * File Name    : rcc.c                                             *
  * Description  : rcc Driver Implementation                         *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #include "bit_math.h"
 #include "rcc.h"

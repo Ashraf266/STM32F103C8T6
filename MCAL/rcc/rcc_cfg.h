@@ -1,9 +1,9 @@
 /********************************************************************
- * Module       : rcc                                              *
- * File Name    : rcc_cfg.h                                        *
- * Description  : rcc driver static configurations                 *
+ * Module       : rcc                                               *
+ * File Name    : rcc_cfg.h                                         *
+ * Description  : rcc driver static configurations                  *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #ifndef RCC_CFG_H
 #define RCC_CFG_H

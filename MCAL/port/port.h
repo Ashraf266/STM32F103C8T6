@@ -3,7 +3,7 @@
  * File Name    : port.h                                            *
  * Description  : contains definitions & interfaces for port driver *
  * Author       : Mohamed Ashraf                                    *
- *******************************************************************/
+ ********************************************************************/
 
 #ifndef PORT_H
 #define PORT_H
