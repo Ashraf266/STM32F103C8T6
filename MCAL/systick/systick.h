@@ -90,7 +90,7 @@ void SYSTICK_stopTimer(void);
 [Description]   : Gets the Elapsed Time "Reload - Val"            *
 [Args]:         : void                                            *
 [in]	        : NOTHING                                         *
-[out]	        : NOTHING                                         *
+[out]	        : The Elapsed Time since timer starts             *
 [in/out]        : NOTHING                                         *
 [Returns]       : u32                                             *
 *******************************************************************/
@@ -102,7 +102,7 @@ u32  SYSTICK_getElapsedTime(void);
 [Description]   : Gets the Remaining Time "Val"                   *
 [Args]:         : void                                            *
 [in]	        : NOTHING                                         *
-[out]	        : NOTHING                                         *
+[out]	        : The Remaining Time to finish conunting          *
 [in/out]        : NOTHING                                         *
 [Returns]       : u32                                             *
 *******************************************************************/
