@@ -1,7 +1,7 @@
 /********************************************************************
- * Module       : nvic                                               *
- * File Name    : nvic.c                                             *
- * Description  : nvic Implementation                                *
+ * Module       : nvic                                              *
+ * File Name    : nvic.c                                            *
+ * Description  : nvic Implementation                               *
  * Author       : Mohamed Ashraf                                    *
  ********************************************************************/
 
