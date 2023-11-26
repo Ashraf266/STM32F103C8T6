@@ -101,13 +101,13 @@ void SYSTICK_setBusyWait(u32 ticks)
 *******************************************************************/
 void SYSTICK_setIntervalSingle(u32 ticks, void (* ptr2func)(void))
 {
-	SYSTICK->ENABLE 	= 0;				/* Disable Systick */
-	SYSTICK->VAL 		= 0;				/* clear timer counts */
-	SYSTICK->LOAD		= ticks;            /* set Reload value */
-	SYSTICK->TICK_INT 	= 1;                /* Enable Interrupts */
-	CallBackFunc = ptr2func;			    /* Set callBack function */
-	singleIntervalFlag  = 1;				/* Set single interval flag to interrupt only one time and stop */
-	SYSTICK->ENABLE		= 1;				/* Enable Systick */
+	SYSTICK->ENABLE 	= 0;				            /* Disable Systick */
+	SYSTICK->VAL 		= 0;				            /* clear timer counts */
+	SYSTICK->LOAD		= ticks;                        /* set Reload value */
+	SYSTICK->TICK_INT 	= 1;                            /* Enable Interrupts */
+	CallBackFunc = (volatile void (*)(void))ptr2func;	/* Set callBack function */
+	singleIntervalFlag  = 1;				            /* Set single interval flag to interrupt only one time and stop */
+	SYSTICK->ENABLE		= 1;				            /* Enable Systick */
 	
 }
 
@@ -127,13 +127,13 @@ void SYSTICK_setIntervalSingle(u32 ticks, void (* ptr2func)(void))
 *******************************************************************/
 void SYSTICK_setIntervalPeriodic(u32 ticks, void (* ptr2func)(void))
 {
-	SYSTICK->ENABLE 	= 0;				/* Disable Systick */
-	SYSTICK->VAL 		= 0;				/* clear timer counts */
-	SYSTICK->LOAD		= ticks;            /* set Reload value */
-	SYSTICK->TICK_INT 	= 1;                /* Enable Interrupts */
-	CallBackFunc = ptr2func;                /* Set callBack function */
-	singleIntervalFlag  = 0;				/* Clear single interval flag */
-	SYSTICK->ENABLE		= 1;				/* Enable Systick */
+	SYSTICK->ENABLE 	= 0;				            /* Disable Systick */
+	SYSTICK->VAL 		= 0;				            /* clear timer counts */
+	SYSTICK->LOAD		= ticks;                        /* set Reload value */
+	SYSTICK->TICK_INT 	= 1;                            /* Enable Interrupts */
+	CallBackFunc = (volatile void (*)(void))ptr2func;   /* Set callBack function */
+	singleIntervalFlag  = 0;				            /* Clear single interval flag */
+	SYSTICK->ENABLE		= 1;				            /* Enable Systick */
 	
 }
 
