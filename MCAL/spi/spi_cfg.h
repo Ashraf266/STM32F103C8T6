@@ -1,7 +1,7 @@
 /********************************************************************
- * Module       : spi                                              *
- * File Name    : spi_cfg.h                                        *
- * Description  : spi driver static configurations                 *
+ * Module       : spi                                               *
+ * File Name    : spi_cfg.h                                         *
+ * Description  : spi driver static configurations                  *
  * Author       : Mohamed Ashraf                                    *
  ********************************************************************/
 

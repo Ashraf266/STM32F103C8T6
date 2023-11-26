@@ -1,7 +1,7 @@
 /********************************************************************
- * Module       : spi                                           *
- * File Name    : spi.c                                         *
- * Description  : spi Implementation                            *
+ * Module       : spi                                               *
+ * File Name    : spi.c                                             *
+ * Description  : spi Implementation                                *
  * Author       : Mohamed Ashraf                                    *
  ********************************************************************/
 

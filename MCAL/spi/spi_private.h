@@ -1,8 +1,9 @@
-/****************************************/
-/* Author	: Ashraf					*/
-/* Version	: V01				   		*/
-/* Date		: 7/11/2023				    */
-/****************************************/
+/********************************************************************
+ * Module       : spi                                               *
+ * File Name    : spi_private.h                                     *
+ * Description  : contains private definitions & types              *
+ * Author       : Mohamed Ashraf                                    *
+ ********************************************************************/
 
 #ifndef SPI_PRIVATE_H
 #define SPI_PRIVATE_H
