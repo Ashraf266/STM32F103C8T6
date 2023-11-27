@@ -118,7 +118,7 @@ u16 SPI_sendReceiveSync(u8 instanceID, u16 dataToTransmit);
 [Args]:         : u8 instanceID, u16 dataToTransmit               *
 [in]	        : the ID of the SPI peripheral                    *
 |                 data to be transmitted                          *
-[out]	        : NOTHING                                         *
+[out]	        : The received data                               *
 [in/out]        : NOTHING                                         *
 [Returns]       : void                                            *
 [NOTES]         : if Data format is 8 bit write 8bit data         *
