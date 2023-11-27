@@ -15,9 +15,6 @@ SPI_ConfigType SPI_1_Cfg = {
                             SPI_MASTER_MODE,
                             SPI_IDLE_HIGH,
                             SPI_WRITE_ON_FIRST_EDGE,
-                            SPI_INTERRUPT_DISABLE,
-                            SPI_INTERRUPT_DISABLE,
-                            NULL_PTR,
                             NULL_PTR
 };
 
@@ -28,9 +25,6 @@ SPI_ConfigType SPI_2_Cfg = {
                             SPI_MASTER_MODE,
                             SPI_IDLE_HIGH,
                             SPI_WRITE_ON_FIRST_EDGE,
-                            SPI_INTERRUPT_DISABLE,
-                            SPI_INTERRUPT_DISABLE,
-                            NULL_PTR,
                             NULL_PTR
 };
 

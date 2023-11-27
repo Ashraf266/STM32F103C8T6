@@ -50,14 +50,9 @@
 #define SPI_IDLE_HIGH                   (1u)
 
 /******* Clock Phase *******/
-/* NOTE Clock Phase is waht to do on the first Edge */
+/* NOTE Clock Phase is what to do on the first Edge */
 #define SPI_READ_ON_FIRST_EDGE			(0u)
 #define SPI_WRITE_ON_FIRST_EDGE			(1u)
-
-
-/******* Interrupts *******/
-#define SPI_INTERRUPT_DISABLE			(0u)
-#define SPI_INTERRUPT_ENABLE			(1u)
 
 
 /*******************************************************************************
@@ -73,10 +68,7 @@ typedef struct
 	u8 Master_Slave;
 	u8 ClockPolarity;
 	u8 ClockPhase;
-	u8 TX_Interrupt;
-	u8 RX_Interrupt;
-	void (*TX_INT_FUNC)(u16);
-	void (*RX_INT_FUNC)(void);
+	void (*INT_FUNC)(u16);
 	
 }SPI_ConfigType;
 
@@ -133,32 +125,6 @@ u16 SPI_sendReceiveSync(u8 instanceID, u16 dataToTransmit);
 |                 instead of 16 bit rest forced to be zero by HW  *
 *******************************************************************/
 void SPI_sendReceiveAsync(u8 instanceID, u16 dataToTransmit);
-
-
-/******************************************************************
-[Function Name] : SPI_TXEinterruptEnable                          *
-[Description]   : Enables the SPI TXE interrupt                   *
-[Args]:         : u8 instanceID                                   *
-[in]	        : the ID of the SPI peripheral                    *
-[out]	        : NOTHING                                         *
-[in/out]        : NOTHING                                         *
-[Returns]       : void                                            *
-*******************************************************************/
-void  SPI_TXEinterruptEnable(u8 instanceID);
-
-
-/******************************************************************
-[Function Name] : SPI_TXEinterruptDisable                         *
-[Description]   : Disables the SPI TXE interrupt                  *
-[Args]:         : u8 instanceID                                   *
-[in]	        : the ID of the SPI peripheral                    *
-[out]	        : NOTHING                                         *
-[in/out]        : NOTHING                                         *
-[Returns]       : void                                            *
-[NOTES]         : Remember to Disable the TXE interrupt in the    *
-|                 call Back function after receiving the data     *
-*******************************************************************/
-void  SPI_TXEinterruptDisable(u8 instanceID);
 
 
 #endif /* SPI_H */
