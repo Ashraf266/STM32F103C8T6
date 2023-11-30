@@ -1,7 +1,7 @@
 /********************************************************************
- * Module       : systick                                              *
- * File Name    : systick_cfg.h                                        *
- * Description  : systick driver static configurations                 *
+ * Module       : systick                                           *
+ * File Name    : systick_cfg.h                                     *
+ * Description  : systick driver static configurations              *
  * Author       : Mohamed Ashraf                                    *
  ********************************************************************/
 
