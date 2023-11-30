@@ -16,6 +16,11 @@
  *******************************************************************************/
 
 /******* LCD *******/
+#define LCD_CLEAR_COMMAND                    0x01
+#define LCD_GO_TO_HOME                       0x02
+#define LCD_CURSOR_OFF                       0x0C
+#define LCD_CURSOR_ON                        0x0E
+#define LCD_SET_CURSOR_LOCATION              0x80
 
 
 
@@ -36,6 +41,17 @@
 void LCD_init(void);
 
 
+
+/******************************************************************
+[Function Name] : LCD_sendCommand                                 *
+[Description]   : Sends command to The LCD                        *
+[Args]:         : u8 command                                      *
+[in]	        : command to be send to the LCD                   *
+[out]	        : NOTHING                                         *
+[in/out]        : NOTHING                                         *
+[Returns]       : void                                            *
+*******************************************************************/
+void LCD_sendCommand(u8 command);
 
 
 #endif /* LCD_H */
