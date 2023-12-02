@@ -17,11 +17,7 @@
  *******************************************************************************/
 
 DIO_pinGroupType dataPins = {
-#if ((LCD_DATA_MODE == LCD_8_BIT_MODE))
-    0xFF,
-#elif (LCD_DATA_MODE == LCD_4_BIT_MODE)
     0xF,
-#endif
     LCD_DATA_OFFSET,
     LCD_DATA_PORT_ID
     };
@@ -32,10 +28,10 @@ DIO_pinGroupType dataPins = {
  *******************************************************************************/
 
 /* function to make delays in ms not accurate but it does the work */
-static void delay(int ms)
+static void delay(u32 ms)
 {
-    int i;
-    for (i = 0; i < ms*1000*LCD_CPU_CLK; i++)
+    volatile u32 i;
+    for (i = 0; i < (ms*1000*LCD_CPU_CLK); i++)
     {
         __asm("NOP");
     }
@@ -55,25 +51,14 @@ void LCD_init(void)
 
     delay(20);		/* LCD Power ON delay always > 15ms */
 
-#if ((LCD_DATA_MODE == LCD_8_BIT_MODE))
-    
-    /* use 2-lines LCD + 8-bits Data Mode + 5*7 dot display Mode */
-	LCD_sendCommand(LCD_TWO_LINES_EIGHT_BITS_MODE);
-    
-#elif (LCD_DATA_MODE == LCD_4_BIT_MODE)
-    
-    /* Send for 4 bit initialization of LCD  */
-	LCD_sendCommand(LCD_TWO_LINES_FOUR_BITS_MODE_INIT1);
-	LCD_sendCommand(LCD_TWO_LINES_FOUR_BITS_MODE_INIT2);
+    /* Initialization sequence for 4-bit mode */
+    LCD_sendCommand(0x02); /* 4-bit mode initialization */
+    LCD_sendCommand(0x28); /* Function Set: 2 lines, 5x8 matrix */
+    LCD_sendCommand(0x0C); /* Display On, Cursor Off, Blink Off */
+    LCD_sendCommand(0x06); /* Entry Mode Set: Increment cursor, No display shift */
+    LCD_sendCommand(0x01); /* Clear display */
 
-	/* use 2-lines LCD + 4-bits Data Mode + 5*7 dot display Mode */
-	LCD_sendCommand(LCD_TWO_LINES_FOUR_BITS_MODE);
-
-#endif
-
-	LCD_sendCommand(LCD_CURSOR_OFF); /* cursor off */
-	LCD_sendCommand(LCD_CLEAR_COMMAND); /* clear LCD at the beginning */
-
+    delay(2); /* Additional delay after clearing the display */
 }
 
 
@@ -89,29 +74,129 @@ void LCD_init(void)
 *******************************************************************/
 void LCD_sendCommand(u8 command)
 {
-    DIO_writePin(LCD_RW_PORT_ID, LCD_RW_PIN_ID, DIO_PIN_LOW);
-    DIO_writePin(LCD_RS_PORT_ID, LCD_RS_PIN_ID, DIO_PIN_LOW);
-    delay(1);
-    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_HIGH);
-    delay(1);
-
-#if ((LCD_DATA_MODE == LCD_8_BIT_MODE))
-    
-    DIO_writePinGroup(&dataPins, command);
-    delay(1);
-
-#elif (LCD_DATA_MODE == LCD_4_BIT_MODE)
-
+    /* send Higher nibble */
     DIO_writePinGroup(&dataPins, (command>>4));
-    delay(1);
-    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_LOW);
-    delay(1);
+    DIO_writePin(LCD_RS_PORT_ID, LCD_RS_PIN_ID, DIO_PIN_LOW);
     DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_HIGH);
     delay(1);
-    DIO_writePinGroup(&dataPins, command);
-    delay(1);
-
-#endif
     DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_LOW);
     delay(1);
+
+    /* send Lower nibble */
+    DIO_writePinGroup(&dataPins, (command&0xF));
+    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_HIGH);
+    delay(1);
+    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_LOW);
+
+    delay(2);
 }
+
+
+
+/******************************************************************
+[Function Name] : LCD_displayCharacter                            *
+[Description]   : Displays a character on the screen              *
+[Args]:         : u8 data                                         *
+[in]	        : Character to be displayed on the LCD            *
+[out]	        : NOTHING                                         *
+[in/out]        : NOTHING                                         *
+[Returns]       : void                                            *
+*******************************************************************/
+void LCD_displayCharacter(u8 data)
+{
+        /* send Higher nibble */
+    DIO_writePinGroup(&dataPins, (data>>4));
+    DIO_writePin(LCD_RS_PORT_ID, LCD_RS_PIN_ID, DIO_PIN_HIGH);
+    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_HIGH);
+    delay(1);
+    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_LOW);
+    delay(1);
+
+    /* send Lower nibble */
+    DIO_writePinGroup(&dataPins, (data&0xF));
+    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_HIGH);
+    delay(1);
+    DIO_writePin(LCD_E_PORT_ID, LCD_E_PIN_ID, DIO_PIN_LOW);
+
+    delay(2);
+}
+
+
+
+/******************************************************************
+[Function Name] : LCD_displayString                               *
+[Description]   : Displays a string on the screen                 *
+[Args]:         : u8 data                                         *
+[in]	        : pointer to the first character in the string    *
+[out]	        : NOTHING                                         *
+[in/out]        : NOTHING                                         *
+[Returns]       : void                                            *
+*******************************************************************/
+void LCD_displayString(const u8 *str)
+{
+	u8 i = 0;
+	while(str[i] != '\0')
+	{
+		LCD_displayCharacter(str[i]);
+		i++;
+	}
+}
+
+
+
+/******************************************************************
+[Function Name] : LCD_moveCursor                                  *
+[Description]   : Moves the cursor to a certain position          *
+|                 the screen                                      *
+[Args]:         : u8 row,u8 col                                   *
+[in]	        : row Number & col Number "0 or 1"                *
+[out]	        : NOTHING                                         *
+[in/out]        : NOTHING                                         *
+[Returns]       : void                                            *
+*******************************************************************/
+void LCD_moveCursor(u8 row, u8 col)
+{
+    u8 position = 0x80; /* Base address for the first row */
+
+    if (row == 1) {
+        position = 0xC0; /* Base address for the second row */
+    }
+
+    position += col; /* Adjust for the column */
+
+    LCD_sendCommand(position | 0x80); /* Set cursor to the calculated position */
+}
+
+
+
+/******************************************************************
+[Function Name] : LCD_displayStringRowColumn                      *
+[Description]   : Displays a string in a certain position         *
+[Args]:         : u8 row,u8 col                                   *
+[in]	        : row Number & col Number "0 or 1"                *
+[out]	        : NOTHING                                         *
+[in/out]        : NOTHING                                         *
+[Returns]       : void                                            *
+*******************************************************************/
+void LCD_displayStringRowColumn(u8 row, u8 col, const u8 *str)
+{
+	LCD_moveCursor(row,col); /* go to to the required LCD position */
+	LCD_displayString(str); /* display the string */
+}
+
+
+
+/******************************************************************
+[Function Name] : LCD_clearScreen                                  *
+[Description]   : Clears the Screen                               *
+[Args]:         : void                                            *
+[in]	        : NOTHING                                         *
+[out]	        : NOTHING                                         *
+[in/out]        : NOTHING                                         *
+[Returns]       : void                                            *
+*******************************************************************/
+void LCD_clearScreen(void)
+{
+	LCD_sendCommand(LCD_CLEAR_COMMAND); /* Send clear display command */
+}
+
