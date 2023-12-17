@@ -28,12 +28,12 @@ typedef struct
     u32 CNT;
     u32 PSC;
     u32 ARR;
-    u32 reserved_1; /* Not reserved in TIM1 but we won't use it in this Driver */
+    u32 RCR; /* Only Available in TIM1 Reserved in Other Timers*/
     u32 CCR1;
     u32 CCR2;
     u32 CCR3;
     u32 CCR4;
-    u32 reserved_2; /* Not reserved in TIM1 but we won't use it in this Driver */
+    u32 BDTR; /* Only Available in TIM1 Reserved in Other Timers*/
     u32 DCR;
     u32 DMAR;
 	
