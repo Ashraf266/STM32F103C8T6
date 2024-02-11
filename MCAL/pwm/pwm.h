@@ -55,6 +55,16 @@ typedef struct
 
 
 /*******************************************************************************
+ *                               External Variables                            *
+ *******************************************************************************/
+
+extern PWM_ConfigType PWM_TIM1_Cfg;
+extern PWM_ConfigType PWM_TIM2_Cfg;
+extern PWM_ConfigType PWM_TIM3_Cfg;
+extern PWM_ConfigType PWM_TIM4_Cfg;
+
+
+/*******************************************************************************
  *                             Functions Prototypes                            *
  *******************************************************************************/
 
