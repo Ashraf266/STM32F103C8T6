@@ -13,8 +13,8 @@ I2C_ConfigType I2C_1_Cfg = {
     I2C_STANDARD_SPEED,
     0x05,
     0x24,
-    36,
-    180
+    0xf,
+    150
 };
 
 I2C_ConfigType I2C_2_Cfg = {

@@ -68,6 +68,8 @@ void I2C_start(u8 instanceID);
 
 void I2C_stop(u8 instanceID);
 
+void I2C_sendAddress(u8 instanceID, u8 address, u8 op);
+
 void I2C_writeByte(u8 instanceID, u8 data);
 
 u8 I2C_readWithAck(u8 instanceID);

@@ -73,6 +73,16 @@ void I2C_stop(u8 instanceID)
 	I2C[instanceID]->CR1 |= (1<<9);
 }
 
+void I2C_sendAddress(u8 instanceID, u8 address, u8 op)
+{
+	u16 reg = 0x00;
+	I2C[instanceID]->DR = (address << 1) | op;
+	while( !(GET_BIT( I2C[instanceID]->SR1 ,1)) );
+	reg = I2C[instanceID]->SR1;
+	reg = I2C[instanceID]->SR2;
+	while( !(GET_BIT( I2C[instanceID]->SR1 ,7)) );
+}	
+
 void I2C_writeByte(u8 instanceID, u8 data)
 {
 	I2C[instanceID]->DR = data;
