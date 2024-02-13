@@ -80,7 +80,6 @@ void I2C_sendAddress(u8 instanceID, u8 address, u8 op)
 	while( !(GET_BIT( I2C[instanceID]->SR1 ,1)) );
 	reg = I2C[instanceID]->SR1;
 	reg = I2C[instanceID]->SR2;
-	while( !(GET_BIT( I2C[instanceID]->SR1 ,7)) );
 }	
 
 void I2C_writeByte(u8 instanceID, u8 data)
