@@ -62,4 +62,37 @@ void I2C_init(u8 instanceID, I2C_ConfigType *cfgPtr)
 
 
 
+void I2C_start(u8 instanceID)
+{
+	I2C[instanceID]->CR1 |= (1<<8);
+	while( GET_BIT( I2C[instanceID]->CR1 ,8) );
+}
+
+void I2C_stop(u8 instanceID)
+{
+	I2C[instanceID]->CR1 |= (1<<9);
+}
+
+void I2C_writeByte(u8 instanceID, u8 data)
+{
+	I2C[instanceID]->DR = data;
+	while( !(GET_BIT( I2C[instanceID]->SR1 ,7)) ); /* Need checking */
+}
+
+u8 I2C_readWithAck(u8 instanceID)
+{
+	while( !(GET_BIT( I2C[instanceID]->SR1 ,6)) );
+	SET_BIT(I2C[instanceID]->CR1, 10);
+	return I2C[instanceID]->DR;
+}
+
+u8 I2C_readWithNack(u8 instanceID)
+{
+	while( !(GET_BIT( I2C[instanceID]->SR1 ,6)) );
+	CLR_BIT(I2C[instanceID]->CR1, 10);
+	return I2C[instanceID]->DR;
+}
+
+
+
 

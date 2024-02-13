@@ -64,7 +64,14 @@ extern I2C_ConfigType I2C_2_Cfg;
 *******************************************************************/
 void I2C_init(u8 instanceID, I2C_ConfigType *cfgPtr);
 
+void I2C_start(u8 instanceID);
 
+void I2C_stop(u8 instanceID);
 
+void I2C_writeByte(u8 instanceID, u8 data);
+
+u8 I2C_readWithAck(u8 instanceID);
+
+u8 I2C_readWithNack(u8 instanceID);
 
 #endif /* I2C_H */
