@@ -85,7 +85,7 @@ void I2C_sendAddress(u8 instanceID, u8 address, u8 op)
 void I2C_writeByte(u8 instanceID, u8 data)
 {
 	I2C[instanceID]->DR = data;
-	while( !(GET_BIT( I2C[instanceID]->SR1 ,7)) ); /* Need checking */
+	while( !(GET_BIT( I2C[instanceID]->SR1 ,7)) );
 }
 
 u8 I2C_readWithAck(u8 instanceID)
