@@ -31,6 +31,8 @@ void PWM_init(u8 instanceID, PWM_ConfigType *cfgPtr)
 	PWM[instanceID] ->SMCR = 0;
 	PWM[instanceID] ->DIER = 0;
 	PWM[instanceID] ->EGR = 0;
+    /* Temp solution it Enables OC for all Channel Pins */
+	PWM[instanceID] ->CCER = (1<<0) | (1<<4) | (1<<8) | (1<<12);
 	PWM[instanceID] ->PSC = cfgPtr->Prescaler;
 	PWM[instanceID] ->ARR = cfgPtr->AutoReload;
 	PWM[instanceID] ->DCR = 0;
@@ -47,25 +49,21 @@ void PWM_init(u8 instanceID, PWM_ConfigType *cfgPtr)
     if(cfgPtr->Channel_1_Enable == PWM_CHANNEL_ENABLE)
     {
 	    PWM[instanceID] ->CCMR1 = ((PWM[instanceID] ->CCMR1) & 0xFF00) | ((0b110 << 4) | (1 << 3));
-        PWM[instanceID] ->CCER = (1<<0);
     }
 
     if(cfgPtr->Channel_2_Enable == PWM_CHANNEL_ENABLE)
     {
 	    PWM[instanceID] ->CCMR1 = ((PWM[instanceID] ->CCMR1) & 0x00FF) | ((0b110 << 12) | (1 << 11));
-        PWM[instanceID] ->CCER = (1<<4);
     }
 
     if(cfgPtr->Channel_3_Enable == PWM_CHANNEL_ENABLE)
     {
 	    PWM[instanceID] ->CCMR2 = ((PWM[instanceID] ->CCMR2) & 0xFF00) | ((0b110 << 4) | (1 << 3));
-        PWM[instanceID] ->CCER = (1<<8);
     }
 
     if(cfgPtr->Channel_4_Enable == PWM_CHANNEL_ENABLE)
     {
 	    PWM[instanceID] ->CCMR1 = ((PWM[instanceID] ->CCMR1) & 0x00FF) | ((0b110 << 12) | (1 << 11));
-        PWM[instanceID] ->CCER = (1<<12);
     }
 
 }
